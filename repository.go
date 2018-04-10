@@ -3,7 +3,7 @@ package main
 
 import (
 	"github.com/jinzhu/gorm"
-	pb "github.com/rafaelbartolome/micro-test/user-service/proto/user"
+	pb "github.com/rafaelbartolome/micro-test-user-service/proto/user"
 )
 
 type Repository interface {
