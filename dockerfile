@@ -5,7 +5,7 @@ WORKDIR /go/src/github.com/rafaelbartolome/micro-test-user-service
 
 COPY . .
 
-RUN go get
+RUN go get -v
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
 
 FROM alpine:latest
