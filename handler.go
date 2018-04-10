@@ -7,9 +7,7 @@ import (
 	"golang.org/x/net/context"
 	"log"
 
-	micro "github.com/micro/go-micro"
 	"golang.org/x/crypto/bcrypt"
-	"golang.org/x/net/context"
 )
 
 const topic = "user.created"
