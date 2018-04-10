@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/rafaelbartolome/micro-test-user-service/proto/auth"
+	pb "github.com/rafaelbartolome/micro-test-user-service/proto/user"
 
 	"fmt"
 	"github.com/micro/go-micro"
