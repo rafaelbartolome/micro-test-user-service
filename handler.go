@@ -3,6 +3,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	micro "github.com/micro/go-micro"
 	pb "github.com/rafaelbartolome/micro-test-user-service/proto/user"
 	"golang.org/x/crypto/bcrypt"
@@ -60,22 +61,24 @@ func (srv *service) Auth(ctx context.Context, req *pb.User, res *pb.Token) error
 }
 
 func (srv *service) Create(ctx context.Context, req *pb.User, res *pb.Response) error {
+	log.Println("Creating user: ", req)
+
 	// Generates a hashed version of our password
 	hashedPass, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
-		log.Println("GenerateFromPassword: %v", err)
-		return err
+		return errors.New(fmt.Sprintf("error hashing password: %v", err))
 	}
+
 	req.Password = string(hashedPass)
 	if err := srv.repo.Create(req); err != nil {
-		log.Println("Create: %v", err)
-		return err
+		return errors.New(fmt.Sprintf("error creating user: %v", err))
 	}
+
 	res.User = req
 	// if err := srv.Publisher.Publish(ctx, req); err != nil {
-	// 	log.Println("Publish: %v", err)
-	// 	return err
+	// 	return errors.New(fmt.Sprintf("error publishing event: %v", err))
 	// }
+
 	return nil
 }
 
